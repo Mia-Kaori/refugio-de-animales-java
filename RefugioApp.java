@@ -1,62 +1,56 @@
-package paq1;
+package paq21;
 
 import java.util.*;
 
-import paq.*;
+import paq20.Canario;
+import paq20.Gato;
+import paq20.Perro; 
+import paq20.Animal;
 
 public class RefugioApp {
 
-	static Scanner scLine = new Scanner (System.in);
-	static Scanner scInt = new Scanner (System.in);
-	static Scanner scBoolean = new Scanner (System.in);
-	static Scanner scDouble = new Scanner (System.in);
+	static Scanner scLine = new Scanner(System.in);
+	static Scanner scInt = new Scanner(System.in);
+	static Scanner scBoolean = new Scanner(System.in);
 	static Animal a1;
 	static Animal a2;
 	static Animal a3;
-	
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		System.out.println("--ALTA INICIAL DE ANIMALES EN EL REFUGIO--");
-		
-		System.out.println("--ALTA DE PERRO--");
-		System.out.println("Nombre del perro: ");
+		System.out.println("---ALTA INICIAL DE ANIMALES EN EL REFUGIO---\n");
+
+		System.out.println("--ALTA DE PERRO--\n");
+		System.out.printf("Nombre del perro: ");
 		String nombreP = scLine.nextLine();
-		
-		System.out.println("Edad del perro: ");
+		System.out.printf("Edad del perro: ");
 		int edadP = scInt.nextInt();
-		
-		System.out.println("Raza del perro: ");
+		System.out.printf("Raza del perro: ");
 		String raza = scLine.nextLine();
-		
-		a1=new Perro(nombreP, edadP, raza);
-		
-		System.out.println("--ALTA DE GATO--");
-		System.out.println("Nombre del gato: ");
+
+		a1 = new Perro(nombreP, edadP, raza);
+
+		System.out.println("\n--ALTA DE GATO--");
+		System.out.printf("Nombre del gato: ");
 		String nombreG = scLine.nextLine();
-		
-		System.out.println("Edad del gato: ");
+		System.out.printf("Edad del gato: ");
 		int edadG = scInt.nextInt();
-		
-		System.out.println("¿Es cazador? (true/false): ");
+		System.out.printf("¿Es cazador? (true/false): ");
 		boolean cazador = scBoolean.nextBoolean();
-		
-		a2 =new Gato(nombreG, edadG, cazador);
-		
-		System.out.println("--ALTA DE CANARIO--");
+
+		a2 = new Gato(nombreG, edadG, cazador);
+
+		System.out.println("\n--ALTA DE CANARIO--");
 		System.out.printf("Nombre del canario: ");
 		String nombreC = scLine.nextLine();
-		
-		System.out.println("Edad del canario: ");
+		System.out.printf("Edad del canario: ");
 		int edadC = scInt.nextInt();
-		
-		System.out.println("Color de la pluma ");
+		System.out.printf("Color de la pluma: ");
 		String color = scLine.nextLine();
-		
 		a3 = new Canario(nombreC, edadC, color);
-		
-		boolean salir = false;
 
+		boolean salir = false;
 		do {
 			System.out.println("\n---MENÚ REFUGIO---");
 			System.out.println("1.-Escuchar a todos los animales");
@@ -66,115 +60,116 @@ public class RefugioApp {
 			System.out.println("0.-Salir");
 			System.out.println("Elige una opción: ");
 			int opcion = scInt.nextInt();
-
 			switch (opcion) {
 			case 1:
-				sonidoAnimales();
+				opcion1();
+
 				break;
 
 			case 2:
-				fichasAnimales();
+				opcion2();
+
 				break;
 
 			case 3:
-				animalViejo();
+				opcion3();
+
 				break;
 
 			case 4:
-				elegirAnimalMostrar();
+				opcion4();
+
 				break;
 
 			case 0:
-				salir = true;
 				System.out.println("Saliendo del refugio...");
-				break;
-			}
-
-		} while (!salir);
-	
-	}
-
-	
-	
-
-	private static void elegirAnimalMostrar() {
-		// TODO Auto-generated method stub
-		elegirAnimal();
-	}
-
-	public static void elegirAnimal() {
-		System.out.println("--PROBAR UN ANIMAL COMPLETO--");
-		boolean salir = false;
-		do {
-			System.out.println("¿Qué animal quieres elegir?");
-			System.out.println("1.-Primero");
-			System.out.println("2.-Segundo");
-			System.out.println("3.-Tercero");
-			System.out.println("Elige una opción: ");
-			int opcion = scInt.nextInt();
-
-			switch (opcion) {
-			case 1:
-				System.out.println("Has elegido a: ");
-				mostrarFicha(a1);
-				salir = true;
-				break;
-
-			case 2:
-				System.out.println("Has elegido a: ");
-				mostrarFicha(a2);
-				salir = true;
-				break;
-
-			case 3:
-				System.out.println("Has elegido a: ");
-				mostrarFicha(a3);
 				salir = true;
 				break;
 			}
-
 		} while (!salir);
+
 	}
 
-
-	private static void animalViejo() {
+	private static void opcion4() {
 		// TODO Auto-generated method stub
-		System.out.println("El animal más viejo es: ");
-		Animal viejo = calcularMasViejo( a1,  a2,  a3);
+		elegirAnimal(a1, a2, a3);
+	}
+
+	private static void opcion3() {
+		// TODO Auto-generated method stub
+		System.out.println("Animal más viejo: ");
+		Animal viejo = calcularMasViejo(a1, a2, a3);
 		mostrarFicha(viejo);
 	}
-	
-	public static Animal calcularMasViejo(Animal a1, Animal a2, Animal a3) {
-		if(a1.getEdad()>a2.getEdad() && a1.getEdad()>a3.getEdad()) {
-			return a1;
-		}if(a2.getEdad()>a1.getEdad() && a2.getEdad()>a3.getEdad()) {
-			return a2;
-		}else {
-			return a3;
-		}	
-	}
 
-	private static void fichasAnimales() {
+	private static void opcion2() {
 		// TODO Auto-generated method stub
-		System.out.println("FICHAS DE LOS ANIMALES");
+		System.out.println("\n--FICHAS DE LOS ANIMALES--\n");
 		mostrarFicha(a1);
 		System.out.println("\n");
 		mostrarFicha(a2);
 		System.out.println("\n");
 		mostrarFicha(a3);
 	}
-	
-	public static void mostrarFicha(Animal a) {
-		System.out.println(a.getTipo());
-		System.out.println(a.emitirSonido());
-	}
 
-	private static void sonidoAnimales() {
+	private static void opcion1() {
 		// TODO Auto-generated method stub
-		System.out.println("SONIDO DE TODOS LOS ANIMALES");
+		System.out.println("\n--SONIDO DE TODOS LOS ANIMALES--");
 		System.out.println(a1.emitirSonido());
 		System.out.println(a2.emitirSonido());
 		System.out.println(a3.emitirSonido());
 	}
 
+	private static void elegirAnimal(Animal a1, Animal a2, Animal a3) {
+		// TODO Auto-generated method stub
+		System.out.println("\n--PROBAR UN ANIMAL CONCRETO--");
+		System.out.println("\n¿Qué animal quieres elegir?");
+		boolean pregunta = false;
+		while (!pregunta) {
+			System.out.println("1.-Primero");
+			System.out.println("2.-Segundo");
+			System.out.println("3.-Tercero");
+			int opcion1 = scInt.nextInt();
+			switch (opcion1) {
+			case 1:
+				System.out.println(a1.getTipo());
+				System.out.println(a1.emitirSonido());
+				pregunta = true;
+				break;
+			case 2:
+				System.out.println(a2.getTipo());
+				System.out.println(a2.emitirSonido());
+				pregunta = true;
+				break;
+			case 3:
+				System.out.println(a3.getTipo());
+				System.out.println(a3.emitirSonido());
+				pregunta = true;
+				break;
+			}
+
+		}
+
+	}
+
+	private static Animal calcularMasViejo(Animal a1, Animal a2, Animal a3) {
+		// TODO Auto-generated method stub
+
+		if (a1.getEdad() > a2.getEdad() && a1.getEdad() > a3.getEdad()) {
+			return a1;
+		} else if (a2.getEdad() > a1.getEdad() && a2.getEdad() > a3.getEdad()) {
+			return a2;
+		} else {
+			return a3;
+		}
+
+	}
+
+	public static void mostrarFicha(Animal a) {
+
+		System.out.println(a.getTipo());
+		System.out.println(a.emitirSonido());
+	}
+
 }
+
